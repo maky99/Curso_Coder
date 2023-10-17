@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+
+
+
+
+</head>
+
+<body>
+    <header class="container-fluid bg-dark d-flex justify-content-center">
+        <h1 class="text-warning bg-dark mb-0 p-2">Control de STOCK </h1>
+    </header>
+
+    <div class="container ">
+        <div class="row">
+            <div class="col-sm-12 col-md-7 col-lg-7 col-xl-7">
+                <table id="posiciones" class="table table-bordered">
+                    <thead>
+                        <tr class="table-success">
+                            <th>Cod</th>
+                            <th>Producto</th>
+                            <th>Detalle</th>
+                            <th>Cantidad</th>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                </table>
+                <button class="btn btn-success" id="llenaTabla">Llenar Tabla</button>
+            </div>
+            <div class="col-sm-12 col-md-5 col-lg-5 col-xl-5">
+                <nav class="bg-light">
+                    <div class="container-flui">
+                        <h1>Cargar Producto</h1>
+                        <span class="navbar-brand"></span>
+                    </div>
+                </nav>
+                <div>
+                    <label class="form-label">Codigo</label>
+                    <input type="text" class="form-control" id="cod" placeholder="Codigo">
+
+                    <label class="form-label">Producto</label>
+                    <input type="text" class="form-control" id="prod" placeholder="Producto">
+
+                    <label class="form-label">Detalle</label>
+                    <input type="text" class="form-control" id="det" placeholder="Detalle">
+
+                    <label class="form-label">Cantidad</label>
+                    <input type="text" class="form-control" id="cant" placeholder="Cantidad">
+                    <br>
+                    <button class="btn btn-success" id="cargar">cargar</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- Bootstrap CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+        crossorigin="anonymous"></script>
+
+    <script src="./traFinal.js"></script>
+</body>
+
+</html>

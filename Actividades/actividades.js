@@ -8,7 +8,7 @@
 //         alert(num + " numero ingresado es impar.")
 //     }
 //     num = parseInt(prompt("Ingresando 10 se sale "))
-// }
+//
 //=======================================================================
 // let num = parseInt(prompt("Ingresar un numero"));
 // let num2 = parseInt(prompt("¿cuantas veces queres que sume tu numero : " + num + " ?"));
