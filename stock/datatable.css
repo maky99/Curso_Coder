@@ -1,0 +1,6 @@
+/* clase para aplicarle a la tabla y centrarlos  */
+/* "!important" para que prevalezca sobre el estilo que tiene la tabla  */
+.centrado{
+    text-align: center !important;
+    vertical-align: middle !important;
+}
