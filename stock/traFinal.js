@@ -136,17 +136,17 @@ function editarProducto(index) {
     //pongo que el codigo no lo pueda editar 
     editCod.disabled = true;
     editCod.value = productoSeleccionado.cod;
-    editProducto.value = prompt("Nombre de Producto");
-    editDetalle.value = prompt("Detalle de Producto");
-    editCantidad.value = prompt("Cantidad de Producto");
+    // editProducto.value = prompt("Nombre de Producto");
+    // editDetalle.value = prompt("Detalle de Producto");
+    // editCantidad.value = prompt("Cantidad de Producto");
     //agregado para cumplir con la consigna lineas 143-144-145
-    let msj = "Producto:  " + editProducto.value + "  Detalle:  " + editDetalle.value + "  Cantidad:  " + editCantidad.value;
-    alert(msj);
+    // let msj = "Producto:  " + editProducto.value + "  Detalle:  " + editDetalle.value + "  Cantidad:  " + editCantidad.value;
+    // alert(msj);
     agregarProducto();
-    // editCod.value = productoSeleccionado.cod;
-    // editProducto.value = productoSeleccionado.producto;
-    // editDetalle.value = productoSeleccionado.detalle;
-    // editCantidad.value = productoSeleccionado.cantidad;
+    editCod.value = productoSeleccionado.cod;
+    editProducto.value = productoSeleccionado.producto;
+    editDetalle.value = productoSeleccionado.detalle;
+    editCantidad.value = productoSeleccionado.cantidad;
 }
 
 
