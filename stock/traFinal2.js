@@ -1,7 +1,6 @@
 //para cargar el primer producto
 //agregarProducto("popo", "plpl", 55);
 
-
 // elementos HTML de entrada
 let COD = document.getElementById("cod");
 let producto = document.getElementById("prod");
@@ -9,11 +8,10 @@ let detalle = document.getElementById("det");
 let cantidad = document.getElementById("cant");
 
 //hago que el boton llene la tabla al hacer click
-const CARGAR = document.querySelector("#cargar");
+let CARGAR = document.querySelector("#cargar");
 CARGAR.addEventListener("click", obtengoDatos);
 
 function limpiarCampos() {
-
     // Limpia los campos del formulario
     COD.value = "";
     producto.value = "";
@@ -26,9 +24,9 @@ function limpiarCampos() {
 function obtengoDatos() {
     // Obtén los valores ingresados en los campos del formulario
     //const COD = COD.value;
-    const prod = producto.value;
-    const det = detalle.value;
-    const cant = cantidad.value;
+    let prod = producto.value;
+    let det = detalle.value;
+    let cant = cantidad.value;
 
     // Valida que los campos no estén vacíos
     if (!prod || !det || !cant) {
@@ -53,7 +51,7 @@ function obtengoDatos() {
 //function agregarProducto(producto, detalle, cantidad) {
 function agregarProducto(producto, detalle, cantidad) {
     // Recuperar productos existentes del localStorage
-    const productosRecuperados = localStorage.getItem('productosGuardados');
+    let productosRecuperados = localStorage.getItem('productosGuardados');
     let productos = [];
     if (productosRecuperados) {
         // parseao el objeto
@@ -62,15 +60,15 @@ function agregarProducto(producto, detalle, cantidad) {
 
 
     // veo la cantidad de productos
-    const longitudProductos = Object.keys(productos).length;
+    let longitudProductos = Object.keys(productos).length;
     //genero el codigo nuevo
-    const cod = longitudProductos + 1;
+    let cod = longitudProductos + 1;
     // creo un nuevo objeto de producto
-    const nuevoProducto = { cod, producto, detalle, cantidad };
+    let nuevoProducto = { cod, producto, detalle, cantidad };
     //  agrego el nuevo producto al arreglo de productos
     productos.push(nuevoProducto);
     // convierto el arreglo de productos a JSON
-    const productosJSON = JSON.stringify(productos);
+    let productosJSON = JSON.stringify(productos);
     // actualizado en el localStorage
     localStorage.setItem('productosGuardados', productosJSON);
 }
@@ -151,8 +149,7 @@ const listUser = async () => {
             <td><i class="fa-solid fa-check" style="color: green;"></i></td>
             <td>
             <button class="btn btn-sm btn-primary editar" data-index="${index}"><i class="fa-solid fa-pencil"></i></button>
-            
-            <button class="btn btn-sm btn-danger"><i class="fa-solid fa-trash-can"></i></button>
+            <button class="btn btn-sm btn-danger eliminar" data-index="${index}"><i class="fa-solid fa-trash-can"></i></button>
             </td>
             </tr>`;
             //el icono es copiado de la pagina https://fontawesome.com/icons/check?f=classic&s=solid
@@ -169,6 +166,15 @@ const listUser = async () => {
                 editarProducto(index);
             });
         });
+        //para usar el boton eliminar
+        const botonesEliminar = document.querySelectorAll(".eliminar");
+        botonesEliminar.forEach((boton) => {
+            boton.addEventListener("click", () => {
+                const index = boton.getAttribute("data-index");
+                eliminarProducto(index);
+            });
+        });
+
 
     } catch (error) {
         alert(error);
@@ -189,7 +195,7 @@ function editarProducto(index) {
     document.getElementById('cargar').style.display = 'none';
 
     // Recupera la lista de productos del localStorage
-    const productosRecuperados = localStorage.getItem('productosGuardados');
+    let productosRecuperados = localStorage.getItem('productosGuardados');
     //console.log("linea 193",productosRecuperados)
     let productos = [];
 
@@ -200,66 +206,76 @@ function editarProducto(index) {
     // Verifica que el índice sea válido
     if (index >= 0 && index < productos.length) {
         // Obtén el producto a editar
-        const productoAEditar = productos[index];
+        let productoAEditar = productos[index];
         //console.log("linea 193", productoAEditar)
 
-        // Rellena los campos del formulario con los datos del producto
-        const editCod = document.getElementById("cod");
-        const editProducto = document.getElementById("prod");
-        const editDetalle = document.getElementById("det");
-        const editCantidad = document.getElementById("cant");
-
-        editCod.value = productoAEditar.cod;
-        editProducto.value = productoAEditar.producto;
-        editDetalle.value = productoAEditar.detalle;
-        editCantidad.value = productoAEditar.cantidad;
-        // Ahora puedes permitir que el usuario realice las ediciones necesarias en el formulario
-        // Después de que el usuario haga las ediciones, debes guardar los cambios en el localStorage
-        // y actualizar la lista de productos en la tabla.
+        // llena los campos del formulario con los datos del producto a editar
+        document.getElementById("cod").value = productoAEditar.cod;
+        document.getElementById("cod").readOnly = true;//parque no edite el cod
+        document.getElementById("prod").value = productoAEditar.producto;
+        document.getElementById("det").value = productoAEditar.detalle;
+        document.getElementById("cant").value = productoAEditar.cantidad;
     }
 }
 
-const EDIT = document.querySelector("#editar");
+let EDIT = document.querySelector("#editar");
 EDIT.addEventListener("click", editaBoton);
 
 function editaBoton() {
     // Actualiza los valores del productoAEditar con los valores de los campos de entrada
-    COD = document.getElementById("cod").value;
-    producto = document.getElementById("prod").value;
-    detalle = document.getElementById("det").value;
-    cantidad = document.getElementById("cant").value;
-    console.log("cod", COD, "producto", producto, "detalle", detalle, "cantidad", cantidad)
+    let COD = document.getElementById("cod").value;
+    let producto = document.getElementById("prod").value;
+    let detalle = document.getElementById("det").value;
+    let cantidad = document.getElementById("cant").value;
 
-    const productosRecuperados = localStorage.getItem('productosGuardados');
-    let productos = [];
-    productos = JSON.parse(productosRecuperados);
+    let productosRecuperados = localStorage.getItem('productosGuardados');
+    let productos = JSON.parse(productosRecuperados);
 
-    const nuevoProductoEditado = { COD, producto, detalle, cantidad };
-    //console.log("linea 193", productos)
+    let nuevoProductoEditado = { cod: COD, producto, detalle, cantidad };
 
     productos.forEach((producto, index) => {
         console.log("238  ", COD)
-        if (producto.cod == nuevoProductoEditado.COD) {
-            // Actualiza el producto con los nuevos valores
+        if (producto.cod == nuevoProductoEditado.cod) {
+            // actualiza el producto con los nuevos valores
             productos[index] = nuevoProductoEditado;
-            //console.log("239  ", productos[index])
-            //console.log("240  ", productos[index - 1])
         }
     });
-    const productosJSON = JSON.stringify(productos);
 
-    // Guarda los cambios en el localStorage
-    localStorage.setItem('productosGuardados', productosJSON);
+    // guarda los cambios en el localstorge
+    localStorage.setItem('productosGuardados', JSON.stringify(productos));
 
-    productos.forEach((producto, index) => {
-        console.log("23dsf8  ", producto)
-    });
-    //no me limpia los capos
+    // limpia los campos
     limpiarCampos();
-    // muestro el boton editar
-    document.getElementById('editar').style.display = 'none';
+    //parque pueda editar el cod
+    document.getElementById("cod").readOnly = false;
 
-    // oculto el boton cargar
+    // actualza la tabla
+    initDataTable();
+
+    // oculata el  editar y muestra el cargar
+    document.getElementById('editar').style.display = 'none';
     document.getElementById('cargar').style.display = 'inline';
+
 }
+
+function eliminarProducto(index) {
+    const productosRecuperados = localStorage.getItem('productosGuardados');
+    let productos = [];
+
+    if (productosRecuperados) {
+        productos = JSON.parse(productosRecuperados);
+    }
+
+    if (index >= 0 && index < productos.length) {
+        // elimina el producto con indice especificado
+        productos.splice(index, 1);
+
+        // actualiza el localstorge
+        localStorage.setItem('productosGuardados', JSON.stringify(productos));
+
+        // actualiza la tabla
+        initDataTable();
+    }
+}
+
 
