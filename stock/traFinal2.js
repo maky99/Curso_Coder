@@ -146,7 +146,7 @@ const listUser = async () => {
             <td>${producto.producto}</td>
             <td>${producto.detalle}</td>
             <td>${producto.cantidad}</td>
-            <td><i class="fa-solid fa-check" style="color: green;"></i></td>
+            <td><i class="fa-solid fa-check" style="color: orange;"></i></td>
             <td>
             <button class="btn btn-sm btn-primary editar" data-index="${index}"><i class="fa-solid fa-pencil"></i></button>
             <button class="btn btn-sm btn-danger eliminar" data-index="${index}"><i class="fa-solid fa-trash-can"></i></button>
