@@ -71,6 +71,7 @@ CARGAR.addEventListener("click", agregarProducto);
 
 // Función para agregar un nuevo producto al array
 function agregarProducto() {
+
     const nuevoCod = parseInt(COD.value);
     const nuevoProd = PROD.value;
     const nuevoDet = DET.value;
@@ -96,6 +97,8 @@ function agregarProducto() {
         CANT.value = "";
         // actualizo la tabla 
         CompletoTabla();
+
+
     } else {
         //creo un nuevo objeto de producto
         const nuevoProducto = {
