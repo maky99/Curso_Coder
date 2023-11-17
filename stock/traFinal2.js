@@ -47,32 +47,30 @@ function obtengoDatos() {
     initDataTable();
 }
 
-//ingreso los productos 
-//function agregarProducto(producto, detalle, cantidad) {
+//ingreso los productos
 function agregarProducto(producto, detalle, cantidad) {
-    // Recuperar productos existentes del localStorage
-    let productosRecuperados = localStorage.getItem('productosGuardados');
-    let productos = [];
-    if (productosRecuperados) {
-        // parseao el objeto
-        productos = JSON.parse(productosRecuperados);
+    function agregarProducto(producto, detalle, cantidad) {
+        // Recuperar productos existentes del localStorage
+        let productosRecuperados = localStorage.getItem('productosGuardados');
+        let productos = [];
+        if (productosRecuperados) {
+            // parseao el objeto
+            productos = JSON.parse(productosRecuperados);
+        }
+        // veo la cantidad de productos
+        let longitudProductos = Object.keys(productos).length;
+        //genero el codigo nuevo
+        let cod = longitudProductos + 1;
+        // creo un nuevo objeto de producto
+        let nuevoProducto = { cod, producto, detalle, cantidad };
+        //  agrego el nuevo producto al arreglo de productos
+        productos.push(nuevoProducto);
+        // convierto el arreglo de productos a JSON
+        let productosJSON = JSON.stringify(productos);
+        // actualizado en el localStorage
+        localStorage.setItem('productosGuardados', productosJSON);
     }
-
-
-    // veo la cantidad de productos
-    let longitudProductos = Object.keys(productos).length;
-    //genero el codigo nuevo
-    let cod = longitudProductos + 1;
-    // creo un nuevo objeto de producto
-    let nuevoProducto = { cod, producto, detalle, cantidad };
-    //  agrego el nuevo producto al arreglo de productos
-    productos.push(nuevoProducto);
-    // convierto el arreglo de productos a JSON
-    let productosJSON = JSON.stringify(productos);
-    // actualizado en el localStorage
-    localStorage.setItem('productosGuardados', productosJSON);
 }
-
 
 //estas dos variables me sirven para saber que si mi data table esta inicializada ya que al momento de actualizar
 let dataTable;
@@ -134,9 +132,19 @@ const initDataTable = async () => {
 //esta funcion solo lista los usuarios en una tabla comun
 const listUser = async () => {
     try {
-        const productosRecuperados = localStorage.getItem('productosGuardados');
-        //console.log("linea 80", productosRecuperados);
-        const productos = JSON.parse(productosRecuperados);
+        // const productosRecuperados = localStorage.getItem('productosGuardados');
+        // console.log("linea 80", productosRecuperados);
+        // const productos = JSON.parse(productosRecuperados);
+        const response = await fetch('datos.json');
+
+        // Verificar si la solicitud fue exitosa (código de estado 200)
+        if (!response.ok) {
+            throw new Error('Error al cargar los datos');
+        }
+
+        // Obtener los datos JSON de la respuesta
+        const productos = await response.json();
+
         let content = ``;
         productos.forEach((producto, index) => {
             //interamos y vamos acumulando(lo mandamos al html) 
@@ -278,4 +286,14 @@ function eliminarProducto(index) {
     }
 }
 
+veoDatos();
+async function veoDatos() {
+    try {
+        const respuesta = await fetch('./datos.json');
+        const data = await respuesta.json();
+        console.log("toy con data ", data)
 
+    } catch (error) {
+        console.error("Error al cargar datos iniciales desde el archivo:", error);
+    }
+}

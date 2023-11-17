@@ -1,0 +1,20 @@
+[
+    {
+        "cod": "2",
+        "producto": "3",
+        "detalle": "5",
+        "cantidad": "5"
+    },
+    {
+        "cod": "3",
+        "producto": "33asdasd",
+        "detalle": "4asdasd",
+        "cantidad": "4asdasd"
+    },
+    {
+        "cod": 3,
+        "producto": "weqw6",
+        "detalle": "qweq654",
+        "cantidad": "65"
+    }
+]
