@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="./main.css">
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="./ti.js" type="module"></script>
+  <title>ExpertD.</title>
+</head>
+
+<body>
+  <header class="container-fluid bg-dark d-flex justify-content-center">
+    <h1 class="text-warning bg-dark mb-0 p-2">Paises Aleatorios</h1>
+  </header>
+  <section class="container">
+    <div class="w-60 m-auto text-center" id="equipo">
+      <h1 class="mb-5 fs-9">¡Veamos cuánto sabes!</h1>
+      <h2 class="text-primary">Para comenzar, tienes que carga tu nombre.</h2>
+    </div>
+    <div class="d-grid gap-2 col-6 mx-auto">
+      <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#ventanaModal">
+        Cargar Jugador
+      </button>
+    </div>
+    <div id="ventanaModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="tituloVentana"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 id="tituloVentana">Nuevo Jugador</h5>
+            <button class="close" data-bs-dismiss="modal" aria-label="Cerrar">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form class="needs-validation" novalidate>
+              <div class="form-group">
+                <div class="alert alert-success">
+                  <h6><strong>Ingresa tu nombre:</strong></h6>
+                  <input type="text" class="form-control" id="nombre" required>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-warning" type="button" data-bs-dismiss="modal">
+              Cerrar
+            </button>
+            <button class="btn btn-success" id="boton" type="submit" onclick="nombreJugador()" data-bs-dismiss="modal">
+              Aceptar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="p-2 text-center">
+    <h1 id="resultado"></h1>
+    <p id="tablaLlena"></p>
+  </div>
+  <div class="text-center">
+    <h1 id="tiem"></h1>
+  </div>
+  <div class="row">
+    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+      <div id="mostar" class="d-none w-50">
+        <table id="posiciones" class="table table-bordered text-center ">
+          <thead>
+            <tr class="table-success">
+              <th class="text-center">#</th>
+              <th class="text-center">Nombre</th>
+              <th class="text-center">Puntos</th>
+              <th class="text-center">Tiempo</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+      <div id="cuerpo" class="col-sm-6 col-md-6 col-lg-6 col-xl-6"></div>
+      <div id="titulo" class="d-none flex-column align-items-center justify-content-center">
+        <button id="btnPlay" onclick="cargar()" class="custom-button">
+          <div>
+            <span>
+              <p>PLAY</p>
+              <p></p>
+            </span>
+          </div>
+          <div>
+            <span>
+              <p>VAMOS A JUGAR</p>
+              <p></p>
+            </span>
+          </div>
+        </button>
+      </div>
+      <div id="resp" class="border d-none">
+        <select class=" form-select d-flex w-50 text-center mx-auto" aria-label="Default select example" id="miSelect"
+          oninput='jugar()&&actulizar()'>
+          <option selected>Seleccionar tipo de juego</option>
+          <option value="nombre">Paises</option>
+          <option value="capital">Capitales</option>
+        </select>
+      </div>
+      <div id="pregJueg" class="mx-auto my-auto text-center d-none border">
+        <h1 id="arribaBandera" class="text-center"></h1>
+        <div id="imagen" class="d-flex align-items-center justify-content-center"></div>
+        <div class="container mt-4">
+          <div class="opcion btn btn-outline-primary d-grid gap-2 col-6 mx-auto mb-3" id="opcion-1"
+            onclick="seleccionarOpción(0)">
+            Opción 1
+          </div>
+          <div class="opcion btn btn-outline-primary d-grid gap-2 col-6 mx-auto mb-3" id="opcion-2"
+            onclick="seleccionarOpción(1)">
+            Opción 2
+          </div>
+          <div class="opcion btn btn-outline-primary d-grid gap-2 col-6 mx-auto mb-3" id="opcion-3"
+            onclick="seleccionarOpción(2)">
+            Opción 3
+          </div>
+          <div class="opcion btn btn-outline-primary d-grid gap-2 col-6 mx-auto mb-3" id="opcion-4"
+            onclick="seleccionarOpción(3)">
+            Opción 4
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+    integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+    crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+  <script src="./ti.js"></script>
+</body>
+
+</html>
